@@ -2,6 +2,20 @@ import pool from '../../config/db'
 import { Lesson, LessonSection } from '../../types'
 
 export class LessonsService {
+  static async create(data: Partial<Lesson>): Promise<Lesson> {
+    const { id, course_day_id, title, title_en, estimated_read_minutes } = data as Lesson
+    await pool.execute(
+      'INSERT INTO lessons (id, course_day_id, title, title_en, estimated_read_minutes) VALUES (?, ?, ?, ?, ?)',
+      [id, course_day_id ?? null, title ?? null, title_en ?? null, estimated_read_minutes ?? null],
+    )
+    const [rows] = await pool.query('SELECT * FROM lessons WHERE id = ?', [id]) as [any[], any]
+    return rows[0]
+  }
+
+  static async remove(id: string): Promise<void> {
+    await pool.execute('DELETE FROM lessons WHERE id = ?', [id])
+  }
+
   static async getById(id: string): Promise<Lesson & { sections: LessonSection[] }> {
     const [rows] = await pool.query('SELECT * FROM lessons WHERE id = ?', [id]) as [any[], any]
     if (rows.length === 0) throw Object.assign(new Error('Lesson not found'), { statusCode: 404 })

@@ -2,6 +2,20 @@ import { Request, Response, NextFunction } from 'express'
 import { LessonsService } from './lessons.service'
 
 export class LessonsController {
+  static async create(req: Request, res: Response, next: NextFunction) {
+    try {
+      const lesson = await LessonsService.create(req.body)
+      res.status(201).json(lesson)
+    } catch (err) { next(err) }
+  }
+
+  static async remove(req: Request, res: Response, next: NextFunction) {
+    try {
+      await LessonsService.remove(req.params.id)
+      res.json({ message: 'Lesson deleted' })
+    } catch (err) { next(err) }
+  }
+
   static async getById(req: Request, res: Response, next: NextFunction) {
     try {
       const lesson = await LessonsService.getById(req.params.id)
