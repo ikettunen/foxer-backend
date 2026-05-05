@@ -126,7 +126,8 @@ export class AuthService {
       [rows[0].id, tokenHash, expiresAt],
     )
 
-    await sendPasswordResetEmail(email, token)
+    const resetUrl = `${process.env.APP_URL || 'https://foxer.fi'}/reset-password?token=${token}`
+    await sendPasswordResetEmail({ to: email, resetUrl })
   }
 
   static async resetPassword(token: string, newPassword: string): Promise<void> {

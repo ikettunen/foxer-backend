@@ -46,7 +46,7 @@ export class UsersService {
 
     const values = fields.map(f => (data as Record<string, unknown>)[f])
     const setClause = fields.map(f => `${f} = ?`).join(', ')
-    await pool.execute(`UPDATE users SET ${setClause}, updated_at = NOW() WHERE id = ?`, [...values, id])
+    await pool.execute(`UPDATE users SET ${setClause}, updated_at = NOW() WHERE id = ?`, [...values, id] as any[])
     return this.getById(id)
   }
 

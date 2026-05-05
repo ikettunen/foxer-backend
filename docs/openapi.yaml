@@ -212,6 +212,7 @@ paths:
                 name: { type: string }
                 email: { type: string, format: email }
                 password: { type: string, minLength: 8 }
+                locale: { type: string, enum: [fi, en] }
       responses:
         '201':
           description: Registered
@@ -279,7 +280,14 @@ paths:
       summary: Logout (revoke refresh token)
       security: [{ bearerAuth: [] }]
       responses:
-        '204': { description: Logged out }
+        '200':
+          description: Logged out
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: 'Logged out' }
 
   /auth/forgot-password:
     post:

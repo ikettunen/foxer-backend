@@ -10,7 +10,7 @@
     "db:migrate": "mysql -u $DB_USER -p$DB_PASS $DB_NAME < db/schema.sql",
     "db:seed": "mysql -u $DB_USER -p$DB_PASS $DB_NAME < db/seed.sql",
     "lint": "eslint src --ext .ts",
-    "test": "jest"
+    "test": "jest --runInBand --forceExit"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -26,10 +26,23 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/jest": "^30.0.0",
     "@types/jsonwebtoken": "^9.0.5",
+    "@types/morgan": "^1.9.10",
     "@types/node": "^20.0.0",
     "@types/nodemailer": "^6.4.14",
+    "@types/supertest": "^7.2.0",
+    "@types/swagger-ui-express": "^4.1.8",
+    "@types/yamljs": "^0.2.34",
+    "express-rate-limit": "^8.5.0",
+    "helmet": "^8.1.0",
+    "jest": "^30.3.0",
+    "morgan": "^1.10.1",
+    "supertest": "^7.2.2",
+    "swagger-ui-express": "^5.0.1",
+    "ts-jest": "^29.4.9",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.3.0"
+    "typescript": "^5.3.0",
+    "yamljs": "^0.3.0"
   }
 }

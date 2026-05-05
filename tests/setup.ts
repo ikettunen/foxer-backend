@@ -1,0 +1,7 @@
+process.env.JWT_SECRET = 'test-secret'
+process.env.JWT_REFRESH_SECRET = 'test-refresh-secret'
+process.env.JWT_EXPIRES_IN = '15m'
+process.env.DB_HOST = 'localhost'
+process.env.DB_USER = 'test'
+process.env.DB_PASS = 'test'
+process.env.DB_NAME = 'test'

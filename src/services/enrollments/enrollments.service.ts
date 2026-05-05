@@ -33,3 +33,19 @@ export const unenroll = async (id: number) => {
 export const markEmailSent = async (id: number) => {
   await pool.query('UPDATE enrollments SET email_sent = 1, email_sent_at = NOW() WHERE id = ?', [id])
 }
+
+// Class wrapper for controller compatibility
+export class EnrollmentsService {
+  static async enroll(userId: number, courseId: string, courseDates?: string) {
+    return createEnrollment({ user_id: userId, course_id: courseId, course_dates: courseDates })
+  }
+  static async getByUser(userId: number) {
+    return getEnrollmentsByUser(userId)
+  }
+  static async list({ page, limit }: { page: number; limit: number }) {
+    return getEnrollments()
+  }
+  static async unenroll(id: number) {
+    return unenroll(id)
+  }
+}
